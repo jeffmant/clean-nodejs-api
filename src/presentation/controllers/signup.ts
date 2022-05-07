@@ -4,11 +4,11 @@ import { BadRequest } from '../helpers/http-helper'
 
 export class SingupController {
   handle (httpRequest: HttpRequest): HttpResponse {
-    if (!httpRequest.body.name) {
-      return BadRequest(new MissingParamError('name'))
-    }
-    if (!httpRequest.body.email) {
-      return BadRequest(new MissingParamError('email'))
+    const requiredFields = ['name', 'email']
+    for (const field of requiredFields) {
+      if (!httpRequest.body[field]) {
+        return BadRequest(new MissingParamError(field))
+      }
     }
 
     return {
