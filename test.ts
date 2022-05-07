@@ -1,5 +1,1 @@
-function test (): number {
-  return 1
-}
-
-test()
+console.log('test')
