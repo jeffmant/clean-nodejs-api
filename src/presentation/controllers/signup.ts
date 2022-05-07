@@ -1,3 +1,4 @@
+import { MissingParamError } from '../errors/missing-param-error'
 import { HttpRequest, HttpResponse } from '../protocols/http'
 
 export class SingupController {
@@ -5,13 +6,13 @@ export class SingupController {
     if (!httpRequest.body.name) {
       return {
         statusCode: 400,
-        body: new Error('Missim param: name')
+        body: new MissingParamError('name')
       }
     }
     if (!httpRequest.body.email) {
       return {
         statusCode: 400,
-        body: new Error('Missim param: email')
+        body: new MissingParamError('email')
       }
     }
 
