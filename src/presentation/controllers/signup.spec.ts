@@ -29,3 +29,19 @@ describe('Signup Controller', () => {
     expect(httpResponse.body).toEqual(new Error('Missim param: email'))
   })
 })
+
+describe('Signup Controller', () => {
+  test('Should return 200 if name and email is provided', () => {
+    const sut = new SingupController()
+    const httpRequest = {
+      body: {
+        name: 'any name',
+        email: 'anyEmail@email.com',
+        passwordConfirmation: 'anyPassword'
+      }
+    }
+    const httpResponse = sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(200)
+    expect(httpResponse.body).toEqual({ message: 'Ok' })
+  })
+})
