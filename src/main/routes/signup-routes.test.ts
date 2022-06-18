@@ -17,18 +17,14 @@ describe('Signup Routes', () => {
   })
 
   test('Should return an account with success', async () => {
-    try {
-      await request(app)
-        .post('/api/signup')
-        .send({
-          name: 'valid_name',
-          email: 'valid_email@test.com',
-          password: 'valid_password',
-          passwordConfirmation: 'valid_password'
-        })
-        .expect(200)
-    } catch (error) {
-      console.error(error.message)
-    }
+    await request(app)
+      .post('/api/signup')
+      .send({
+        name: 'valid_name',
+        email: 'valid_email@test.com',
+        password: 'valid_password',
+        passwordConfirmation: 'valid_password'
+      })
+      .expect(200)
   })
 })
