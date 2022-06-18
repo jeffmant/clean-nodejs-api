@@ -128,4 +128,10 @@ describe('Db Authentication Use Case', () => {
     const acessToken = await sut.auth(makeFakeAuthentication())
     expect(acessToken).toBeNull()
   })
+
+  it('Should return accessToken when TokenGenerator returns accessToken', async () => {
+    const { sut } = makeSut()
+    const accessToken = await sut.auth(makeFakeAuthentication())
+    expect(accessToken).toBe('access_token')
+  })
 })
