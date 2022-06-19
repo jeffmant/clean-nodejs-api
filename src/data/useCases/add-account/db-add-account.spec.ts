@@ -49,7 +49,7 @@ const makeAddAccountRepository = (): AddAccountRepository => {
 const makeGetAccountByEmailRepository = (): GetAccountByEmailRepository => {
   class GetAccountByEmailRepositoryStub implements GetAccountByEmailRepository {
     async getByEmail (email: string): Promise<AccountModel> {
-      return await new Promise(resolve => resolve(makeFakeAccount()))
+      return await new Promise(resolve => resolve(null))
     }
   }
   return new GetAccountByEmailRepositoryStub()
@@ -105,6 +105,13 @@ describe('DbAddAccount UseCase', () => {
     const { sut } = makeSut()
     const account = await sut.add(makeFakeAccountData())
     expect(account).toEqual(makeFakeAccount())
+  })
+
+  test('Should return null when GetAccountByEmailRepository not return null', async () => {
+    const { sut, getAccountByEmailRepositoryStub } = makeSut()
+    jest.spyOn(getAccountByEmailRepositoryStub, 'getByEmail').mockReturnValueOnce(new Promise(resolve => resolve(makeFakeAccount())))
+    const account = await sut.add(makeFakeAccountData())
+    expect(account).toBeNull()
   })
 
   it('Should call GetAccountByEmailRepository with correct email', async () => {
