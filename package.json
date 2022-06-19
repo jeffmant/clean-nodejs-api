@@ -14,7 +14,8 @@
   "author": "@jeffmant",
   "license": "ISC",
   "engines": {
-    "node": "16.x"
+    "node": "16.x",
+    "npm": "8.x"
   },
   "scripts": {
     "start": "node dist/main/server.js",
@@ -25,8 +26,7 @@
     "test:unit": "npm test -- --watch -c jest-unit.config.js",
     "test:integration": "npm test -- --watch -c jest-unit.config.js",
     "test:staged": "npm test -- --findRelatedTests",
-    "test:ci": "npm test -- --coverage",
-    "prepare": "husky install"
+    "test:ci": "npm test -- --coverage"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
