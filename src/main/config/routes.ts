@@ -1,10 +1,15 @@
+/* eslint-disable node/no-path-concat */
 import { Express, Router } from 'express'
-import fg from 'fast-glob'
+import { readdirSync } from 'fs'
 
 export default (app: Express): void => {
   const router = Router()
-  app.use('/api', router)
-  fg.sync('**/src/main/routes/**/**routes.ts').map(async file =>
-    (await import(`../../../${file}`)).default(router)
-  )
+  app.use('/api/v1', router)
+  readdirSync(`${__dirname}/../routes`).map(async file => {
+    readdirSync(`${__dirname}/../routes/${file}`).map(async route => {
+      if (!route.includes('.test.')) {
+        (await import(`${__dirname}/../routes/${file}/${route}`)).default(router)
+      }
+    })
+  })
 }

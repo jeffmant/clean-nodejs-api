@@ -24,7 +24,7 @@ describe('Auth Routes', () => {
   describe('POST /signup', () => {
     test('Should return 200 with success', async () => {
       await request(app)
-        .post('/api/signup')
+        .post('/api/v1/signup')
         .send({
           name: 'valid_name',
           email: 'valid_email@test.com',
@@ -47,7 +47,7 @@ describe('Auth Routes', () => {
       })
 
       await request(app)
-        .post('/api/signin')
+        .post('/api/v1/signin')
         .send({
           email: 'valid_email@email.com',
           password: '123'
@@ -57,7 +57,7 @@ describe('Auth Routes', () => {
 
     test('Should return 401 if fails', async () => {
       await request(app)
-        .post('/api/signin')
+        .post('/api/v1/signin')
         .send({
           email: 'valid_email@email.com',
           password: '123'

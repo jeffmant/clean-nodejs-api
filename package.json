@@ -1,10 +1,12 @@
 {
   "name": "clean-node-api",
   "version": "1.1.0",
-  "description": "",
-  "main": "index.js",
+  "description": "NodeJS REST API using TDD, Clean Code, Clean Architecture, SOLID, and Typescript",
+  "main": "dist/main/server.js",
   "scripts": {
-    "start": "sucrase-node src/main/server.ts",
+    "start": "node dist/main/server.js",
+    "build": "rimraf dist && tsc",
+    "dev": "sucrase-node src/main/server.ts",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "npm test -- --watch -c jest-unit.config.js",
@@ -13,13 +15,12 @@
     "test:ci": "npm test -- --coverage",
     "prepare": "husky install"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["nodejs", "typescript", "tdd", "clean-code", "clean-architecture", "solid"],
+  "author": "@jeffmant",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "express": "^4.18.1",
-    "fast-glob": "^3.2.11",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.5.1",
     "validator": "^13.7.0"
@@ -44,6 +45,7 @@
     "husky": "^7.0.4",
     "jest": "^28.1.0",
     "lint-staged": "^12.4.1",
+    "rimraf": "^3.0.2",
     "sucrase": "^3.21.0",
     "supertest": "^6.2.3",
     "ts-jest": "^28.0.1",
