@@ -50,4 +50,10 @@ describe('Account MongoDB Repository', () => {
     expect(account.email).toBe('valid_email@email.com')
     expect(account.password).toBe('valid_password')
   })
+
+  test('Should return null if getByEmail fails', async () => {
+    const sut = makeSut()
+    const account = await sut.getByEmail('valid_email@email.com')
+    expect(account).toBeFalsy()
+  })
 })
