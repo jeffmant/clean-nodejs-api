@@ -8,6 +8,4 @@ RUN npm install --omit=dev
 
 COPY ./dist ./dist
 
-EXPOSE 7000
-
 CMD ["node", "dist/main/server.js"]

@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  mongo:
+    container_name: mongo
+    image: mongo:5
+    restart: always
+    volumes: 
+      - ./data/mongo:/data/db
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_ROOT_USERNAME=root
+      - MONGO_ROOT_PASSWORD=root
+      - MONGO_DATABASE=clean-node
+      - MONGO_USER=docker
+      - MONGO_PASSWORD=mongopw
+
+  api:
+    container_name: api
+    build: .
+    image: clean-node-api
+    restart: always
+    command: npm start
+    links:
+      - mongo
+    volumes:
+      - ./dist:/usr/src/clean-node-api/dist
+    ports:
+      - ${PORT}:${PORT}
+    env_file:
+      - .env
+
