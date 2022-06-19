@@ -1,4 +1,5 @@
 export default {
-  PORT: process.env.port ?? '5050',
-  MONGO_URL: process.env.MONGO_URL ?? 'mongodb://docker:mongopw@localhost:55003'
+  PORT: process.env.PORT ?? '5050',
+  MONGO_URI: process.env.MONGO_URI ?? 'mongodb://docker:mongopw@localhost:55003',
+  JWT_SECRET: process.env.JWT_SECRET ?? 'DJE*92==king-dom'
 }
