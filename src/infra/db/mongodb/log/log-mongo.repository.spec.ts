@@ -11,7 +11,7 @@ describe('Log Mongo Repository', () => {
   let errorCollection: Collection
 
   beforeAll(async () => {
-    await MongoHelper.connect(String(env.MONGO_URI))
+    await MongoHelper.connect(env.MONGO_URL)
   })
 
   beforeEach(async () => {
