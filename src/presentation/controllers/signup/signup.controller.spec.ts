@@ -1,5 +1,5 @@
 import { MissingParamError, ServerError } from '../../errors'
-import { badRequest } from '../../helpers/http/http-helper'
+import { badRequest, serverError } from '../../helpers/http/http-helper'
 import { SignupController } from './signup.controller'
 import {
   AccountModel,
@@ -137,5 +137,13 @@ describe('Signup Controller', () => {
       email: 'any_email@email.com',
       password: 'any_password'
     })
+  })
+
+  it('Should return 500 if Authentication throws', async () => {
+    const { sut, authenticationStub } = makeSut()
+    jest.spyOn(authenticationStub, 'auth').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const httpRequest = makeFakeRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
