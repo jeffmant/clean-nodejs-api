@@ -5,7 +5,7 @@ import {
   GetAccountByEmailRepository,
   UpdateAccessTokenRepository,
   AccountModel
-} from './db-authentication-protocols'
+} from './db-authentication.protocols'
 import { DbAuthentication } from './db-authentication'
 
 const makeFakeAccount = (): AccountModel => ({
