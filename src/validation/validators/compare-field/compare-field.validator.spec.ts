@@ -1,4 +1,4 @@
-import { InvalidParamError } from '../../../errors'
+import { InvalidParamError } from '../../../presentation/errors'
 import { CompareFieldsValidation } from './compare-field.validation'
 
 const makeSut = (field: string, fieldToCompare: string): CompareFieldsValidation =>
