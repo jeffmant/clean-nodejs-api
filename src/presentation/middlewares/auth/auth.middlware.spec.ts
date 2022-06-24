@@ -12,6 +12,12 @@ const makeFakeAccount = (): AccountModel => ({
   password: 'valid_password'
 })
 
+const makeFakeRequest = (): HttpRequest => ({
+  headers: {
+    'x-access-token': 'any_token'
+  }
+})
+
 const makeGetAccountByTokenStub = (): GetAccountByToken => {
   class GetAccountByTokenStub implements GetAccountByToken {
     async get (accessToken: string, role?: string): Promise<AccountModel> {
@@ -46,12 +52,7 @@ describe('Auth Middleware', () => {
   it('Should call GetAccountByToken with correct accessToken', async () => {
     const { sut, getAccountByTokenStub } = makeSut()
     const getSpy = jest.spyOn(getAccountByTokenStub, 'get')
-    const httpRequest: HttpRequest = {
-      headers: {
-        'x-access-token': 'any_token'
-      }
-    }
-    await sut.handle(httpRequest)
+    await sut.handle(makeFakeRequest())
     expect(getSpy).toHaveBeenCalledWith('any_token')
   })
 })
