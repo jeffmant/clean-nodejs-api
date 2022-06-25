@@ -28,7 +28,7 @@ const makeGetAccountByTokenStub = (): GetAccountByToken => {
   return new GetAccountByTokenStub()
 }
 
-interface SutTypes {
+type SutTypes = {
   sut: AuthMiddleware
   getAccountByTokenStub: GetAccountByToken
 }

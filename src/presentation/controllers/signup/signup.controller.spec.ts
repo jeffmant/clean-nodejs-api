@@ -10,7 +10,7 @@ import {
   AuthenticationModel
 } from './signup.controller.protocols'
 
-interface SutTypes {
+type SutTypes = {
   sut: SignupController
   addAccountStub: AddAccount
   validationStub: Validation

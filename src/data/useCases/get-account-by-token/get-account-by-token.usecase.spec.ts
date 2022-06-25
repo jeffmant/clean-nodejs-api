@@ -26,7 +26,7 @@ const makeGetAccountByTokenRepository = (): GetAccountByTokenRepository => {
   return new GetAccountByTokenStub()
 }
 
-interface SutTypes {
+type SutTypes = {
   sut: GetAccountByToken
   decrypterStub: Decrypter
   getAccountByTokenRepository: GetAccountByTokenRepository
