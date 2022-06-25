@@ -1,7 +1,7 @@
 import { MongoHelper } from '../helpers/mongo-helper'
 import { Collection } from 'mongodb'
 import { LogMongoErrorRepository } from './log-mongo.repository'
-import env from '../../../../main/config/env'
+import env from '@src/main/config/env'
 
 const makeSut = (): LogMongoErrorRepository => {
   return new LogMongoErrorRepository()

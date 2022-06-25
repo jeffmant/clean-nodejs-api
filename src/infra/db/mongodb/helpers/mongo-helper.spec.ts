@@ -1,4 +1,4 @@
-import env from '../../../../main/config/env'
+import env from '@src/main/config/env'
 import { MongoHelper as sut } from './mongo-helper'
 
 describe('Mongo helper', () => {
