@@ -1,4 +1,4 @@
-import { DbGetAccountByToken } from '@src/data/useCases/get-account-by-token/get-account-by-tone.usecase'
+import { DbGetAccountByToken } from '@src/data/useCases/get-account-by-token/get-account-by-token.usecase'
 import { GetAccountByToken } from '@src/domain/useCases/getAccountByToken'
 import { JwtAdapter } from '@src/infra/criptography/jwt-adapter/jwt-adapter'
 import { AccountMongoRepository } from '@src/infra/db/mongodb/account/account-mongo.repository'

@@ -1,8 +1,5 @@
-import { GetAccountByToken } from '../../../domain/useCases/getAccountByToken'
-import { Decrypter } from '../../protocols/criptography/decrypter'
-import { AccountModel } from '../add-account/db-add-account.protocols'
-import { DbGetAccountByToken } from './get-account-by-tone.usecase'
-import { GetAccountByTokenRepository } from '../../protocols/db/account/get-account-by-token.repository'
+import { GetAccountByToken, Decrypter, AccountModel, GetAccountByTokenRepository } from './get-account-by-token.protocols'
+import { DbGetAccountByToken } from './get-account-by-token.usecase'
 
 const makeFakeAccount = (): AccountModel => ({
   id: 'valid_id',

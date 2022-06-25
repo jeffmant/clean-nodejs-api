@@ -1,7 +1,4 @@
-import { GetAccountByToken } from '../../../domain/useCases/getAccountByToken'
-import { Decrypter } from '../../protocols/criptography/decrypter'
-import { AccountModel } from '../add-account/db-add-account.protocols'
-import { GetAccountByTokenRepository } from '../../protocols/db/account/get-account-by-token.repository'
+import { GetAccountByToken, Decrypter, AccountModel, GetAccountByTokenRepository } from './get-account-by-token.protocols'
 
 export class DbGetAccountByToken implements GetAccountByToken {
   constructor (
