@@ -72,7 +72,7 @@ describe('Auth Middleware', () => {
 
   it('Should return 500 if GetAccountByToken throws', async () => {
     const { sut, getAccountByTokenStub } = makeSut()
-    jest.spyOn(getAccountByTokenStub, 'get').mockRejectedValueOnce(new Promise((_resolve, reject) => reject(new Error())))
+    jest.spyOn(getAccountByTokenStub, 'get').mockReturnValueOnce(new Promise((_resolve, reject) => reject(new Error())))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   })
