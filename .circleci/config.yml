@@ -1,9 +1,28 @@
 version: 2.1
 orbs:
   node: circleci/node@5.0.2
-workflows:
-    app-deploy:
-      jobs:
-        - node/test:
-            run-command: eslint 'src/**'
-            npm-run: test:coveralls
+jobs:
+  build_and_test:
+    executor: node/default
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          command: npm run test:coveralls
+          name: Run tests
+      - run:
+          command: npm run build
+          name: Build app
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+
+  deploy:
+    executor: heroku/default
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - heroku/deploy-via-git:
+          force: true
