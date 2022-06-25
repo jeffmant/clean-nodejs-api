@@ -12,7 +12,7 @@
     "solid"
   ],
   "author": "@jeffmant",
-  "license": "ISC",
+  "license": "GPL-3.0-or-later",
   "engines": {
     "node": "16.x",
     "npm": "8.x"

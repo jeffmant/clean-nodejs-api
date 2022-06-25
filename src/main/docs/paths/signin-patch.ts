@@ -23,13 +23,16 @@ export const signinPatch = {
         }
       },
       400: {
-        description: 'Bad Request'
+        $ref: '#/components/bad-request'
       },
       401: {
-        description: 'Unauthorized'
+        $ref: '#/components/unauthorized'
       },
-      403: {
-        description: 'Unauthenticated'
+      404: {
+        $ref: '#/components/not-found'
+      },
+      500: {
+        $ref: '#/components/server-error'
       }
     }
   }
