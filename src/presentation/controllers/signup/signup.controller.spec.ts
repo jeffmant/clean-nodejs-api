@@ -1,5 +1,5 @@
-import { AlreadyExistsError, MissingParamError, ServerError } from '../../errors'
-import { badRequest, forbidden, serverError } from '../../helpers/http/http-helper'
+import { AlreadyExistsError, MissingParamError, ServerError } from '@src/presentation/errors'
+import { badRequest, forbidden, serverError } from '@src/presentation/helpers/http/http-helper'
 import { SignupController } from './signup.controller'
 import {
   AccountModel,
