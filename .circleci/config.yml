@@ -26,13 +26,13 @@ jobs:
           paths:
             - .
 
-  deploy: # this can be any name you choose
+  deploy:
     executor: heroku/default
     steps:
       - attach_workspace:
           at: ~/app
       - heroku/deploy-via-git:
-          force: true # force push when pushing to the heroku remote, see: https://devcenter.heroku.com/articles/git
+          force: true
 
 workflows:
   test_my_app:
@@ -40,7 +40,7 @@ workflows:
       - build_and_test
       - deploy:
           requires:
-            - build_and_test # only deploy if the build_and_test job has completed
+            - build_and_test
           filters:
             branches:
-              only: master # only deploy when on main
+              only: master
