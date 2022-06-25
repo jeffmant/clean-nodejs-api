@@ -1,7 +1,7 @@
-import { SigninController } from '../../../../presentation/controllers/signin/signin.controller'
-import { Controller } from '../../../../presentation/protocols'
-import { makeLogControllerDecorator } from '../../decorators/log-decorator.factory'
-import { makeDbAuthentication } from '../../usecases/auth/db-auth-usecase.factory'
+import { SigninController } from '@src/presentation/controllers/signin/signin.controller'
+import { Controller } from '@src/presentation/protocols'
+import { makeLogControllerDecorator } from '@src/main/factories/decorators/log-decorator.factory'
+import { makeDbAuthentication } from '@src/main/factories/usecases/auth/db-auth-usecase.factory'
 import { makeSigninValidation } from './signin-validation.factory'
 
 export const makeSigninController = (): Controller => {
