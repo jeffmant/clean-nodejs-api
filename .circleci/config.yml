@@ -16,7 +16,6 @@ jobs:
           name: Run tests
           environment:
             API_VERSION: v1
-      - coveralls/upload
       - run:
           command: npm run eslint
           name: Run eslint
