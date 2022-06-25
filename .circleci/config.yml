@@ -1,15 +1,9 @@
 version: 2.1
 orbs:
-  node: circleci/node@4.7.0
-jobs:
-  build:
-    executor:
-      name: node/default
-      tag: '16'
-    steps:
-      - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-      - run: eslint 'src/**'
-      - run: npm run test:coveralls
+  node: circleci/node@5.0.2
+workflows:
+    app-deploy:
+      jobs:
+        - node/test:
+            run-command: eslint 'src/**'
+            npm-run: test:coveralls
