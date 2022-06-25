@@ -1,7 +1,6 @@
-import { GetAccountByToken } from '../../../domain/useCases/getAccountByToken'
+import { GetAccountByToken, HttpRequest, HttpResponse, Middlware } from './auth.middleware.protocols'
 import { AccessDeniedError } from '../../errors'
 import { forbidden, ok, serverError } from '../../helpers/http/http-helper'
-import { HttpRequest, HttpResponse, Middlware } from '../../protocols'
 
 export class AuthMiddleware implements Middlware {
   constructor (
