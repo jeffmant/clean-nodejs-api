@@ -78,4 +78,22 @@ describe('Account MongoDB Repository', () => {
       expect(account.accessToken).toBe('any_token')
     })
   })
+
+  describe('getByToken', () => {
+    test('Should return an account on getByToken without role', async () => {
+      const sut = makeSut()
+      await accountCollection.insertOne({
+        name: 'valid_name',
+        email: 'valid_email@email.com',
+        password: 'valid_password',
+        accessToken: 'any_token'
+      })
+      const account = await sut.getByToken('any_token')
+      expect(account).toBeTruthy()
+      expect(account.id).toBeTruthy()
+      expect(account.name).toBe('valid_name')
+      expect(account.email).toBe('valid_email@email.com')
+      expect(account.password).toBe('valid_password')
+    })
+  })
 })
