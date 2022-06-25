@@ -74,4 +74,10 @@ describe('DbGetAccountByToken Use Case', () => {
     const account = await sut.get('any_token', 'any_role')
     expect(account).toBeNull()
   })
+
+  it('Should DbGetAccountByToken return an account when GetAccountByTokenRepository returns an account', async () => {
+    const { sut } = makeSut()
+    const account = await sut.get('any_token', 'any_role')
+    expect(account).toEqual(makeFakeAccount())
+  })
 })
