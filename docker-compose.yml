@@ -9,12 +9,6 @@ services:
       - ./data/mongo:/data/db
     ports:
       - "27017:27017"
-    environment:
-      - MONGO_ROOT_USERNAME=root
-      - MONGO_ROOT_PASSWORD=root
-      - MONGO_DATABASE=clean-node
-      - MONGO_USER=docker
-      - MONGO_PASSWORD=mongopw
 
   api:
     container_name: api-container
@@ -28,8 +22,10 @@ services:
       - ./dist:/usr/src/clean-node-api/dist/
       - ./package.json:/usr/src/clean-node-api/package.json
     ports:
-      - "7000:7000"
+      - "${PORT}:${PORT}"
       - "9222:9222"
     env_file:
       - .env
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/clean-node-api
 
