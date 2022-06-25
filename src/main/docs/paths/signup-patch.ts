@@ -1,12 +1,12 @@
-export const signinPatch = {
+export const signupPatch = {
   post: {
-    tags: ['Signin'],
-    summary: 'Authenticate User',
+    tags: ['Signup'],
+    summary: 'Register User',
     requestBody: {
       content: {
         'application/json': {
           schema: {
-            $ref: '#/schemas/signin-params'
+            $ref: '#/schemas/signup-params'
           }
         }
       }
@@ -25,8 +25,8 @@ export const signinPatch = {
       400: {
         $ref: '#/components/bad-request'
       },
-      401: {
-        $ref: '#/components/unauthorized'
+      403: {
+        $ref: '#/components/forbidden'
       },
       404: {
         $ref: '#/components/not-found'

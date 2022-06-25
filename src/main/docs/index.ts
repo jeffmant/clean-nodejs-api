@@ -1,7 +1,7 @@
 import env from '../config/env'
-import { signinPatch } from './paths/signin-patch'
-import { accountSchema, errorSchema, signinParamsSchema } from './schemas'
-import { badRequest, serverError, unauthenticated, unauthorized, notFound } from './components'
+import { signinPatch, signupPatch } from './paths'
+import { accountSchema, errorSchema, signinParamsSchema, signupParamsSchema } from './schemas'
+import { badRequest, serverError, unauthenticated, unauthorized, notFound, forbidden } from './components'
 
 export default {
   openapi: '3.0.0',
@@ -22,15 +22,18 @@ export default {
   servers: [{
     url: `/api/${env.API_VERSION}`
   }],
-  tags: [{
-    name: 'Authentication'
-  }],
+  tags: [
+    { name: 'Signin' },
+    { name: 'Signup' }
+  ],
   paths: {
-    '/signin': signinPatch
+    '/signin': signinPatch,
+    '/signup': signupPatch
   },
   schemas: {
     account: accountSchema,
     'signin-params': signinParamsSchema,
+    'signup-params': signupParamsSchema,
     error: errorSchema
   },
   components: {
@@ -38,6 +41,7 @@ export default {
     'server-error': serverError,
     'not-found': notFound,
     unauthenticated,
-    unauthorized
+    unauthorized,
+    forbidden
   }
 }
