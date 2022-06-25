@@ -80,4 +80,18 @@ describe('DbGetAccountByToken Use Case', () => {
     const account = await sut.get('any_token', 'any_role')
     expect(account).toEqual(makeFakeAccount())
   })
+
+  it('Should DbGetAccountByToken throw when Decrypter throws', async () => {
+    const { sut, decrypterStub } = makeSut()
+    jest.spyOn(decrypterStub, 'decrypt').mockReturnValueOnce(new Promise((_resolve, reject) => reject(new Error())))
+    const promise = sut.get('any_token', 'any_role')
+    await expect(promise).rejects.toThrow()
+  })
+
+  it('Should DbGetAccountByToken throw when GetAccountByToken throws', async () => {
+    const { sut, getAccountByTokenRepository } = makeSut()
+    jest.spyOn(getAccountByTokenRepository, 'getByToken').mockReturnValueOnce(new Promise((_resolve, reject) => reject(new Error())))
+    const promise = sut.get('any_token', 'any_role')
+    await expect(promise).rejects.toThrow()
+  })
 })
