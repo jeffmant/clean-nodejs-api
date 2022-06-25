@@ -1,6 +1,15 @@
 import { GetAccountByToken } from '../../../domain/useCases/getAccountByToken'
 import { Decrypter } from '../../protocols/criptography/decrypter'
+import { AccountModel } from '../add-account/db-add-account.protocols'
 import { DbGetAccountByToken } from './get-account-by-tone.usecase'
+import { GetAccountByTokenRepository } from '../../protocols/db/account/get-account-by-token.repository'
+
+const makeFakeAccount = (): AccountModel => ({
+  id: 'valid_id',
+  name: 'valid_name',
+  email: 'valid_email@email.com',
+  password: 'valid_password'
+})
 
 const makeDecrypterStub = (): Decrypter => {
   class DecrypterStub implements Decrypter {
@@ -11,17 +20,29 @@ const makeDecrypterStub = (): Decrypter => {
   return new DecrypterStub()
 }
 
+const makeGetAccountByTokenRepository = (): GetAccountByTokenRepository => {
+  class GetAccountByTokenStub implements GetAccountByTokenRepository {
+    async getByToken (token: string, role?: string): Promise<AccountModel> {
+      return await new Promise(resolve => resolve(makeFakeAccount()))
+    }
+  }
+  return new GetAccountByTokenStub()
+}
+
 interface SutTypes {
   sut: GetAccountByToken
   decrypterStub: Decrypter
+  getAccountByTokenRepository: GetAccountByTokenRepository
 }
 
 const makeSut = (): SutTypes => {
   const decrypterStub = makeDecrypterStub()
-  const sut = new DbGetAccountByToken(decrypterStub)
+  const getAccountByTokenRepository = makeGetAccountByTokenRepository()
+  const sut = new DbGetAccountByToken(decrypterStub, getAccountByTokenRepository)
   return {
     sut,
-    decrypterStub
+    decrypterStub,
+    getAccountByTokenRepository
   }
 }
 
@@ -38,5 +59,12 @@ describe('DbGetAccountByToken Use Case', () => {
     jest.spyOn(decrypterStub, 'decrypt').mockReturnValueOnce(new Promise(resolve => resolve(null)))
     const account = await sut.get('any_token', 'any_role')
     expect(account).toBeNull()
+  })
+
+  it('Should DbGetAccountByToken call GetAccountByTokenRepository', async () => {
+    const { sut, getAccountByTokenRepository } = makeSut()
+    const getByTokenSpy = jest.spyOn(getAccountByTokenRepository, 'getByToken')
+    await sut.get('any_token', 'any_role')
+    expect(getByTokenSpy).toHaveBeenCalledWith('any_token', 'any_role')
   })
 })
