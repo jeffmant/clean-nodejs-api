@@ -1,4 +1,4 @@
-import { forbidden, ok } from '../../helpers/http/http-helper'
+import { forbidden, ok, serverError } from '../../helpers/http/http-helper'
 import { AccessDeniedError } from '../../errors'
 import { AuthMiddleware } from './auth.middleware'
 import { HttpRequest } from '../../protocols'
@@ -33,9 +33,9 @@ interface SutTypes {
   getAccountByTokenStub: GetAccountByToken
 }
 
-const makeSut = (): SutTypes => {
+const makeSut = (role?: string): SutTypes => {
   const getAccountByTokenStub = makeGetAccountByTokenStub()
-  const sut = new AuthMiddleware(getAccountByTokenStub)
+  const sut = new AuthMiddleware(getAccountByTokenStub, role)
   return {
     sut,
     getAccountByTokenStub
@@ -50,10 +50,11 @@ describe('Auth Middleware', () => {
   })
 
   it('Should call GetAccountByToken with correct accessToken', async () => {
-    const { sut, getAccountByTokenStub } = makeSut()
+    const role = 'any_role'
+    const { sut, getAccountByTokenStub } = makeSut(role)
     const getSpy = jest.spyOn(getAccountByTokenStub, 'get')
     await sut.handle(makeFakeRequest())
-    expect(getSpy).toHaveBeenCalledWith('any_token')
+    expect(getSpy).toHaveBeenCalledWith('any_token', 'any_role')
   })
 
   it('Should return 403 if GetAccountByToken returns null', async () => {
@@ -67,5 +68,12 @@ describe('Auth Middleware', () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(ok({ accountId: 'valid_id' }))
+  })
+
+  it('Should return 500 if GetAccountByToken throws', async () => {
+    const { sut, getAccountByTokenStub } = makeSut()
+    jest.spyOn(getAccountByTokenStub, 'get').mockRejectedValueOnce(new Promise((_resolve, reject) => reject(new Error())))
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
