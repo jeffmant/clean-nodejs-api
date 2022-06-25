@@ -17,4 +17,9 @@ describe('Mongo helper', () => {
     accountCollection = await sut.getCollection('accounts')
     expect(accountCollection).toBeTruthy()
   })
+
+  test('Should disconnect when it is called', async () => {
+    await sut.disconnect()
+    expect(sut.client).toBeNull()
+  })
 })
