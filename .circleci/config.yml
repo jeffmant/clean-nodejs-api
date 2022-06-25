@@ -2,7 +2,6 @@ version: 2.1
 orbs:
   node: circleci/node@5.0.2
   coveralls: coveralls/coveralls@1.0.6
-  heroku: circleci/heroku@1.2.6
 
 jobs:
   build_and_test:
@@ -27,21 +26,7 @@ jobs:
           paths:
             - .
 
-  deploy:
-    executor: heroku/default
-    steps:
-      - attach_workspace:
-          at: ~/project
-      - heroku/deploy-via-git:
-          force: true
-
 workflows:
   test_my_app:
     jobs:
       - build_and_test
-      - deploy:
-          requires:
-            - build_and_test
-          filters:
-            branches:
-              only: master
