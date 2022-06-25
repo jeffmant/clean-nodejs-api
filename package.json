@@ -1,6 +1,6 @@
 {
   "name": "clean-node-api",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "NodeJS REST API using TDD, Clean Code, Clean Architecture, SOLID, and Typescript",
   "main": "dist/main/server.js",
   "keywords": [
