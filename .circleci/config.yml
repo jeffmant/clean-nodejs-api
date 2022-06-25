@@ -23,7 +23,7 @@ jobs:
           command: npm run build
           name: Build app
       - persist_to_workspace:
-          root: ~/app
+          root: ~/project
           paths:
             - .
 
@@ -31,7 +31,7 @@ jobs:
     executor: heroku/default
     steps:
       - attach_workspace:
-          at: ~/app
+          at: ~/project
       - heroku/deploy-via-git:
           force: true
 
