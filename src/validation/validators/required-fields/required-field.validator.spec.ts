@@ -1,4 +1,4 @@
-import { MissingParamError } from '../../../presentation/errors'
+import { MissingParamError } from '@src/presentation/errors'
 import { RequiredFieldValidation } from './required-field.validation'
 
 const makeSut = (field: string): RequiredFieldValidation => new RequiredFieldValidation(field)
