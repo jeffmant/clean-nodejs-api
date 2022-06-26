@@ -63,9 +63,9 @@
     "eslint-plugin-n": "^15.2.0",
     "eslint-plugin-promise": "^5.2.0",
     "git-commit-msg-linter": "^4.1.2",
-    "husky": "^7.0.4",
+    "husky": "^7.0.2",
     "jest": "^28.1.0",
-    "lint-staged": "^12.4.1",
+    "lint-staged": "^11.1.2",
     "rimraf": "^3.0.2",
     "supertest": "^6.2.3",
     "ts-jest": "^28.0.1",
@@ -73,5 +73,5 @@
   },
   "_moduleAliases": {
     "@src": "dist"
-  }
+  } 
 }
